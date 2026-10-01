@@ -23,11 +23,19 @@ namespace APIsAndJSON
                 Console.WriteLine("");
 
                 var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=imperial";
-                var response = client.GetStringAsync(weatherURL).Result;
+                try
+                {
+                    var response = client.GetStringAsync(weatherURL).Result;
+                    var formattedResponse = JObject.Parse(response).GetValue("main").ToString();
+                    var temp = JObject.Parse(formattedResponse).GetValue("temp");
+                    Console.WriteLine($"The current temperature is {temp} degrees Fahrenheit");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
 
-                var formattedResponse = JObject.Parse(response).GetValue("main").ToString();
-                var temp = JObject.Parse(formattedResponse).GetValue("temp");
-                Console.WriteLine($"The current temperature is {temp} degrees Fahrenheit");
+
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.WriteLine("Would you like to exit?");
