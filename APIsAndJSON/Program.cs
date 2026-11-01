@@ -22,7 +22,7 @@ namespace APIsAndJSON
                 var city = Console.ReadLine();
                 Console.WriteLine("");
 
-                var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=imperial";
+                var weatherURL = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=imperial";
                 try
                 {
                     var response = client.GetStringAsync(weatherURL).Result;
